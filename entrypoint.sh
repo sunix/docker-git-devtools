@@ -29,6 +29,9 @@ if ! grep -Fq "${USER_ID}" /etc/passwd; then
     sed "s/\${HOME}/\/home\/git/g" > /etc/group
 fi
 
+exec "$@"
+
+
 # Grant access to projects volume in case of non root user with sudo rights
 if [ "$(id -u)" -ne 0 ] && command -v sudo >/dev/null 2>&1 && sudo -n true > /dev/null 2>&1; then
     sudo chown ${USER_ID}:${GROUP_ID} /projects
