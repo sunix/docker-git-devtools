@@ -21,12 +21,12 @@ if ! grep -Fq "${USER_ID}" /etc/passwd; then
     cat ${HOME}/passwd.template | \
     sed "s/\${USER_ID}/${USER_ID}/g" | \
     sed "s/\${GROUP_ID}/${GROUP_ID}/g" | \
-    sed "s/\${HOME}/\/home\/theia/g" > /etc/passwd
+    sed "s/\${HOME}/\/home\/git/g" > /etc/passwd
 
     cat ${HOME}/group.template | \
     sed "s/\${USER_ID}/${USER_ID}/g" | \
     sed "s/\${GROUP_ID}/${GROUP_ID}/g" | \
-    sed "s/\${HOME}/\/home\/theia/g" > /etc/group
+    sed "s/\${HOME}/\/home\/git/g" > /etc/group
 fi
 
 # Grant access to projects volume in case of non root user with sudo rights
@@ -34,35 +34,3 @@ if [ "$(id -u)" -ne 0 ] && command -v sudo >/dev/null 2>&1 && sudo -n true > /de
     sudo chown ${USER_ID}:${GROUP_ID} /projects
 fi
 
-# SITTERM / SIGINT
-responsible_shutdown() {
-  echo ""
-  echo "Received SIGTERM"
-  kill -SIGINT ${PID}
-  wait ${PID}
-  exit;
-}
-
-set -e
-
-# setup handlers
-# on callback, kill the last background process, which is `tail -f /dev/null` and execute the specified handler
-trap 'responsible_shutdown' SIGHUP SIGTERM SIGINT
-
-cd ${HOME}
-
-# run theia endpoint
-node /home/theia/lib/node/plugin-remote.js &
-
-PID=$!
-
-# See: http://veithen.github.io/2014/11/16/sigterm-propagation.html
-wait ${PID}
-wait ${PID}
-EXIT_STATUS=$?
-
-# wait forever
-while true
-do
-  tail -f /dev/null & wait ${!}
-done
