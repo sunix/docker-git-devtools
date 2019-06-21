@@ -29,6 +29,8 @@ if ! grep -Fq "${USER_ID}" /etc/passwd; then
     sed "s/\${HOME}/\/home\/git/g" > /etc/group
 fi
 
+git config --global credential.helper 'cache --timeout=3600'
+
 exec "$@"
 
 
