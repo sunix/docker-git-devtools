@@ -1,7 +1,10 @@
-FROM node:8.12.0-alpine
-RUN apk add --update --no-cache git git-svn git-diff-highlight git-perl git-email git-bash-completion git-doc \
-                                tig bash vim less openssh && \
-    rm -rf /var/lib/apt/lists/*
+FROM centos:7
+
+RUN  yum -y install epel-release && yum update -y && \
+     yum install -y git git-svn git-email tig bash vim less openssh hub && \
+     yum clean all && \
+     rm -rf /var/cache/yum
+
 ENV HOME=/home/git
 WORKDIR ${HOME}
 
