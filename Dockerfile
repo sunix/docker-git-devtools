@@ -1,7 +1,7 @@
 FROM centos:7
 
 RUN  yum -y install epel-release && yum update -y && \
-     yum install -y git git-svn git-email colordiff jq tig bash vim less openssh hub bash-completion bash-completion-extras && \
+     yum install -y git git-svn git-email colordiff jq tig bash vim vim-enhanced less openssh hub bash-completion bash-completion-extras && \
      yum clean all && \
      rm -rf /var/cache/yum
 
