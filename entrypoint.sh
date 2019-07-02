@@ -31,6 +31,13 @@ fi
 
 git config --global credential.helper 'cache --timeout=3600'
 
+git config --global color.diff 'auto'
+git config --global color.status 'auto'
+git config --global color.branch 'auto'
+git config --global color.interactive 'auto'
+git config --global color.ui 'true'
+git config --global color.pager 'true'
+
 exec "$@"
 
 
