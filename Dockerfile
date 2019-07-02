@@ -8,6 +8,11 @@ RUN  yum -y install epel-release && yum update -y && \
 ENV HOME=/home/git
 WORKDIR ${HOME}
 
+RUN curl https://raw.github.com/git/git/master/contrib/completion/git-completion.bash > ~/.git-completion.bash && \
+    curl https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh > ~/.git-prompt.bash
+
+ADD bashrc /home/git/.bashrc
+
 RUN mkdir /projects \
     # Store passwd/group as template files
     && cat /etc/passwd | sed s#root:x.*#root:x:\${USER_ID}:\${GROUP_ID}::\${HOME}:/bin/bash#g > ${HOME}/passwd.template \
