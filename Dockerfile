@@ -8,8 +8,8 @@ RUN  yum -y install epel-release && yum update -y && \
 ENV HOME=/home/git
 WORKDIR ${HOME}
 
-RUN curl https://raw.github.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash && \
-    curl https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.bash
+RUN curl https://raw.github.com/git/git/master/contrib/completion/git-completion.bash -o /home/git/.git-completion.bash && \
+    curl https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh -o /home/git/.git-prompt.bash
 
 ADD bashrc /home/git/.bashrc
 
