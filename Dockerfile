@@ -1,15 +1,15 @@
 FROM centos:7
 
 RUN  yum -y install epel-release && yum update -y && \
-     yum install -y git git-svn git-email colordiff jq tig bash vim vim-enhanced less openssh hub bash-completion bash-completion-extras && \
+     yum install -y git git-svn git-email colordiff jq tig bash vim vim-enhanced less openssh hub bash-completion bash-completion-extras wget && \
      yum clean all && \
      rm -rf /var/cache/yum
 
 ENV HOME=/home/git
 WORKDIR ${HOME}
 
-RUN curl https://raw.github.com/git/git/master/contrib/completion/git-completion.bash -o /home/git/.git-completion.bash && \
-    curl https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh -o /home/git/.git-prompt.bash
+RUN wget https://raw.github.com/git/git/master/contrib/completion/git-completion.bash && \
+    wget https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh
 
 ADD bashrc /home/git/.bashrc
 
