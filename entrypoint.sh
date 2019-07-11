@@ -38,6 +38,11 @@ git config --global color.interactive 'auto'
 git config --global color.ui 'true'
 git config --global color.pager 'true'
 
+git config --global hub.protocol https
+
+eval "$(hub alias bash -s)" >> /home/git/.bash_profile
+
+
 exec "$@"
 
 
