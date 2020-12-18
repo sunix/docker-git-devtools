@@ -1,4 +1,4 @@
-FROM centos:7
+FROM quay.io/centos/centos:latest
 
 RUN  yum -y install epel-release && yum update -y && \
      yum install -y git git-svn git-email colordiff jq tig bash vim vim-enhanced less openssh hub bash-completion bash-completion-extras wget zip && \
