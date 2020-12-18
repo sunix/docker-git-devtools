@@ -1,7 +1,7 @@
 FROM quay.io/centos/centos:latest
 
 RUN  yum -y install epel-release && yum update -y && \
-     yum install -y git git-svn git-email colordiff jq tig bash vim vim-enhanced less openssh hub bash-completion bash-completion-extras wget zip && \
+     yum install -y git git-svn git-email colordiff jq tig bash vim vim-enhanced less openssh bash-completion wget zip && \
      yum clean all && \
      rm -rf /var/cache/yum
 
